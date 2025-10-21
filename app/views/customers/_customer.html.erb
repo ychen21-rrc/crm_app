@@ -1,0 +1,21 @@
+<!-- app/views/customers/_customer.html.erb -->
+<div class="customer-card">
+  <div class="customer-avatar">
+    <% if customer.image.attached? %>
+      <%= image_tag customer.image.variant(resize_to_limit: [96, 96]) %>
+    <% else %>
+      <%= image_tag "https://via.placeholder.com/96", alt: "No image" %>
+    <% end %>
+  </div>
+  <div class="customer-info">
+    <h3><%= customer.full_name %></h3>
+    <p>📞 <%= customer.phone_number.presence || "N/A" %></p>
+    <p>✉️ <%= customer.email.presence || "— (missing)" %></p>
+    <% if customer.notes.present? %>
+      <details>
+        <summary>Notes</summary>
+        <p><%= simple_format(customer.notes) %></p>
+      </details>
+    <% end %>
+  </div>
+</div>
