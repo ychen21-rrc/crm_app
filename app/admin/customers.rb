@@ -17,6 +17,8 @@ ActiveAdmin.register Customer do
 
   permit_params :full_name, :phone_number, :email, :notes, :image
 
+  config.filters = false
+
   index do
     selectable_column
     id_column
@@ -46,7 +48,7 @@ ActiveAdmin.register Customer do
       row :notes
       row :image do |customer|
         if customer.image.attached?
-          image_tag url_for(customer.image.variant(resize_to_limit: [200, 200]))
+          image_tag customer.image, style: 'max-width: 200px; max-height: 200px;'
         end
       end
     end
